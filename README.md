@@ -3,5 +3,5 @@ My implementation of the algorithms described in Bishop - Pattern Recognition An
 
 ## Chapter 3
 
-Polynomial Regressor
+Polynomial Regressor <br />
 Bayesian Regressor
