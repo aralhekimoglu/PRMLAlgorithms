@@ -42,7 +42,9 @@ def polynomial_features(x,degree=2):
 # plot the prediction of poly regressor
 def plot_prediction(w,x_range=10):
     x_pred=np.matrix([i for i in range (0,x_range)]).transpose()
-    x_pred_poly=np.matrix(polynomial_features(x_pred,degree=w.size-1))    
+    print x_pred
+    x_pred_poly=np.matrix(polynomial_features(x_pred,degree=w.size-1)) 
+    print x_pred_poly
     for i in range (1,w.size):
         x_pred_poly[:,i]=(x_pred_poly[:,i]-mean_poly[i])/variance_poly[i]  
     y_pred=x_pred_poly.dot(w)    
@@ -51,6 +53,7 @@ def plot_prediction(w,x_range=10):
 # these two are parameters that can be played with
 poly_degree=3
 range_x=100
+lamb=0.005
 
 # split generated data into train and test sets.
 x,y=generate_polynomial_data(degree=poly_degree,amount=100,x_range=range_x)
@@ -67,7 +70,8 @@ x_poly_scaled,mean_poly,variance_poly=feature_scaling(x_poly)
 
 # fit w to data
 x_poly_scaled_t=x_poly_scaled.transpose()
-w=np.linalg.pinv(x_poly_scaled_t.dot(x_poly_scaled)).dot(x_poly_scaled_t).dot(y)
+xt_x=x_poly_scaled_t.dot(x_poly_scaled)
+w=np.linalg.pinv(lamb*np.identity(xt_x.shape[1])+xt_x).dot(x_poly_scaled_t).dot(y)
 
 # plot prediction line
 plot_prediction(w,range_x)
