@@ -8,8 +8,7 @@ class PolynomialRegression:
         self._learned = False
         self._weights = np.NaN
         self._polynomialDegree = 1
-        
-
+    
     @property
     def learned(self):
         return self._learned

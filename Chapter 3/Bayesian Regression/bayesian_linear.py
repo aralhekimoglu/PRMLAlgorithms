@@ -1,13 +1,84 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 26 13:03:50 2018
-
-@author: aralhekimoglu
-"""
 import matplotlib.pyplot as plt
 import numpy as np
 from math import pi as pi
+
+class BaseRegression:
+    def __init__(self):
+        self._learned = False
+        self._Sigma_N = np.NaN
+        self._mean_N = np.NaN
+    
+    @property
+    def learned(self):
+        return self._learned
+    
+    @property
+    def Sigma_N(self):
+        return self._Sigma_N
+    
+    @property
+    def mean_N(self):
+        return self._mean_N
+
+    @learned.setter
+    def learned(self, value):
+        self._learned = value
+    
+    @Sigma_N.setter
+    def Sigma_N(self, value):
+        self._Sigma_N = value
+    
+    @mean_N.setter
+    def mean_N(self, value):
+        self._mean_N = value
+        
+class BayesianRegression(BaseRegression):
+    def fit(self, x, y, Sigma_0, beta=0):
+        """
+        Args:
+            x (np.array): Training data of shape[n_samples, poly_degree]
+            y (np.array): Target values of shape[n_samples, 1]
+            lamb (float): regularization parameter lambda
+            
+        Returns: an instance of self
+        """
+        #Calculate Posterior, again as Gaussian
+        Sigma_0_inv=np.linalg.inv(Sigma_0)         
+        self.Sigma_N=np.linalg.inv(Sigma_0_inv+beta*x.T.dot(x))
+        self.mean_N=beta*Sigma_N.dot(x.T).dot(y) # mean of posterior also w in wTx for regression
+        self.learned=True
+        return self
+    
+    def predict(self, x):
+        """
+        Args:
+            x (np.array): Test data of shape[1, 1]
+
+        Returns:
+            prediction (np.array): shape[1, 1], predicted values
+
+        Raises:
+            ValueError if model has not been fit
+        """
+        if not self.learned:
+            raise NameError('Model has not been fitted, fit first before prediction')
+        
+        return np.dot(self.mean_N, gaussian_basis_function(x))
+    
+    def plot_prediction(self,x_range=100):
+        """
+        Args:
+            x_range (integer): x_range of data to be plotted
+
+        Returns:
+            an instance of self
+
+        Raises:
+            ValueError if model has not been fit
+        """
+        x_pred = np.arange(-2*pi, 2*pi, pi/1000.0)
+        y_pred = [self.predict(i) for i in x_pred] 
+        plt.plot(x_pred,y_pred,'r')
 
 ## generate sinusoidal data with noise option
 def generate_sinusodial_data(amount=100,add_noise=True):
@@ -48,16 +119,6 @@ alpha=0.001
 Sigma_0=(1/float(alpha))*np.identity(num_features)
 mean_0=np.zeros((num_features,1))
 
-#Calculate Posterior, again as Gaussian
-Sigma_0_inv=np.linalg.inv(Sigma_0)         
-Sigma_N=np.linalg.inv(Sigma_0_inv+beta*gaus_features.T.dot(gaus_features))
-mean_N=beta*Sigma_N.dot(gaus_features.T).dot(y) # mean of posterior also w in wTx for regression
-
-# output of bayesian regressor given input x, basis function included
-def output_regression(x,w):
-    return np.dot(w, gaussian_basis_function(x))
-
-x_pred = np.arange(-2*pi, 2*pi, pi/1000.0)
-y_pred = [output_regression(i,mean_N) for i in x_pred] 
-
-plt.plot(x_pred,y_pred,'r')
+bayesionRegressor=BayesianRegression()
+bayesionRegressor.fit(gaus_features,y,Sigma_0,beta)
+bayesionRegressor.plot_prediction()
