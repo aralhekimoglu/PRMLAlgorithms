@@ -8,23 +8,7 @@ class FisherLDA:
         
         self._weightVector=np.NaN
         self._w0=0
-    
-    @property
-    def weightVector(self):
-        return self._weightVector
-    
-    @weightVector.setter
-    def weightVector(self,value):
-        self._weightVector=value
-    
-    @property
-    def w0(self):
-        return self._w0
-    
-    @w0.setter
-    def w0(self,value):
-        self._w0=value
-    
+        
     def fit(self,data1,data2):
         """
         Args:

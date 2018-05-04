@@ -3,7 +3,7 @@ My implementation of the algorithms described in Bishop - Pattern Recognition An
 
 ## Required Packages
 
-numpy
+numpy <br />
 matplotlib
 
 ## Chapter 3
