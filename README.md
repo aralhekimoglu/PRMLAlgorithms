@@ -13,4 +13,5 @@ Bayesian Regressor
 
 ## Chapter 4
 
-Fisher's Linear Discriminant Analysis
+Fisher's Linear Discriminant Analysis <br />
+Gaussian Probabilistic Generative Model
