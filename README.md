@@ -14,4 +14,6 @@ Bayesian Regressor
 ## Chapter 4
 
 Fisher's Linear Discriminant Analysis <br />
-Gaussian Probabilistic Generative Model
+Gaussian Probabilistic Generative Model <br />
+Logistic Regression using Gradient Descent <br />
+Logistic Regression using Iterated Reweighted Least Squares(IRLS)
