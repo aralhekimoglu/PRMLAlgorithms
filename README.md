@@ -4,7 +4,8 @@ My implementation of the algorithms described in Bishop - Pattern Recognition An
 ## Required Packages
 
 numpy <br />
-matplotlib
+matplotlib <br />
+scikit-learn
 
 ## Chapter 3
 
@@ -21,3 +22,8 @@ Logistic Regression using Iterated Reweighted Least Squares(IRLS)
 ## Chapter 5
 
 Multilayer Neural Network
+
+## Chapter 7
+
+Support Vector Machine : Implemented Using Sequential Minimal Optimization(SMO) as described in CS229 
+(http://cs229.stanford.edu/materials/smo.pdf)
