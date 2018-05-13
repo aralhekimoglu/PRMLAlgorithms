@@ -27,3 +27,7 @@ Multilayer Neural Network
 
 Support Vector Machine : Implemented Using Sequential Minimal Optimization(SMO) as described in CS229 
 (http://cs229.stanford.edu/materials/smo.pdf)
+
+## Chapter 9
+
+K-Means Clustering
