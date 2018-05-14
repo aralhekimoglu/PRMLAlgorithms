@@ -30,4 +30,5 @@ Support Vector Machine : Implemented Using Sequential Minimal Optimization(SMO) 
 
 ## Chapter 9
 
-K-Means Clustering
+K-Means Clusteringr <br />
+Mixture of Gaussians using Expectation-Maximization Algorithm
